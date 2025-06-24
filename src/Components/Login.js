@@ -1,10 +1,12 @@
 import axios from "axios";
-import React from "react";
+import React, { use } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 
     const [email, setEmail] = React.useState("");   
     const [password, setPassword] = React.useState("");
+    const navigate = useNavigate();
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -20,8 +22,30 @@ function Login() {
     axios.post(url, data)
         .then((response) => {   
             const dt = response.data;
-            alert(dt.statusMessage);
             console.log(dt);
+            if (dt.statusCode === 200) {
+                if(email === "admin" || password === "admin") {
+                    localStorage.setItem("username", email);
+                    console.log("username", email);
+                    navigate("/adminDashborad"); 
+                }else {
+                    localStorage.setItem("loggedEmail", email);
+                    localStorage.setItem("username", dt.registration.name);
+                    if(dt.registration.userType === "STAFF") {
+                        navigate("/staffDashboard");
+                    }else{
+                        navigate("/userDashborad");
+                    }
+                }
+                // localStorage.setItem("userName", dt.userName);
+                // localStorage.setItem("userId", dt.userId);
+                console.log("username",dt.registration.name);
+                
+            }else {
+                alert(dt.statusMessage);
+                console.log(dt);
+            }
+            
         })
         .catch((error) => {
             console.error("There was an error logging in!", error);
