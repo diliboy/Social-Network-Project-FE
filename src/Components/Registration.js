@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import '../index.css';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Registration() {
 
@@ -8,6 +9,8 @@ function Registration() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [phoneNo, setPhoneNo] = useState("");
+
+    const navigate = useNavigate();
 
     const handleSave = (e) => {
         e.preventDefault();
@@ -42,7 +45,7 @@ function Registration() {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        window.location.url = "/login";
+        navigate("/");
     }
 
 

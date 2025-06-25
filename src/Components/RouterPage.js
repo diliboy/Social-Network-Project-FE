@@ -7,6 +7,8 @@ import AdminDashboard from "./AdminDashboard";
 import RegistrationList from "./RegistrationList";
 import ArticleList from "./ArticleList";
 import News from "./News";
+import Staff from "./Staff";
+import UserArticle from "./UserArticle";
 
 export default function RouterPage() {
     return (
@@ -20,6 +22,8 @@ export default function RouterPage() {
                 <Route path="/registrationList" Component={RegistrationList} />
                 <Route path="/articleList" Component={ArticleList} />
                 <Route path="/newsList" Component={News} />
+                <Route path="/staff" Component={Staff} />
+                <Route path="/userArticle" Component={UserArticle} />
             </Routes>
         </Router>
     );

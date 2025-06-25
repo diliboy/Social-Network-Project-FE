@@ -2,11 +2,12 @@ import axios from "axios";
 import React, { Fragment, useState, useEffect } from "react";
 import AdminHeader from "./AdminHeader";
 
-export default function News() {
+export default function Staff() {
 
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
-    const [data, setData] = React.useState([]);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password,setPassword] = useState("");
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         getData();
@@ -14,13 +15,13 @@ export default function News() {
 
     const handleSave = (e) => {
         e.preventDefault();
-        console.log(title, content);
         const data = {
-            Title: title,
-            Content: content,
-            Email: localStorage.getItem("loggedEmail"),
+            Name: name,
+            Email: email,
+            Password: password,
+            UserType:"STAFF"
         }
-        const url = `https://localhost:44321/api/News/AddNews`;
+        const url = `https://localhost:44321/api/Registration/StaffRegistration`;
         axios.post(url, data)
             .then((response)=>{
                 handleClear(e); // Clear the form fields after saving  
@@ -30,38 +31,42 @@ export default function News() {
                 getData(); // Refresh the news list after saving
             })
             .catch((error)=>{
-                console.error("There was an error saving the news data!", error);
+                console.error("There was an error saving the staff data!", error);
             });
     }
 
     const handleClear = (e) => {
         e.preventDefault();
-        setTitle("");
-        setContent("");
+        setName("");
+        setEmail("");
+        setPassword("");
     }   
 
     const getData = async () => { 
         try {
-            const url = `https://localhost:44321/api/News/NewsList`;
+            const url = `https://localhost:44321/api/Registration/RegistrationList`;
+            const data = {
+                UserType: 'STAFF'
+            }
    
-            axios.get(url)
+            axios.post(url,data)
                 .then((response) => {
                     const data = response.data;
                     
                     if (data.statusCode === 200) {
-                        setData(data.listNews);
+                        setData(data.listRegistration);
                     }
                 })
                 .catch((error) => {
-                    console.error("There was an error fetching the news list!", error); 
+                    console.error("There was an error fetching the staff list!", error); 
                 }
             );
         } catch (error) {
-            console.error("Error fetching news list:", error);
+            console.error("Error fetching staff list:", error);
         }
     }     
     
-    console.log("News List Data", data);
+    console.log("Staff List Data", data);
 
     return (
         <Fragment>
@@ -71,17 +76,22 @@ export default function News() {
             <form>
                 <div className="form-row" style={{ width: "80%", margin: "auto", backgroundColor: "white"}}>
                     <div className="form-group col-md-12">
-                        <h3>Add News</h3>
+                        <h3>Add New Staff</h3>
                     </div>
                     <br/>
                     <div className="form-group col-md-12">
-                        <input type="text" className="form-control" id="title" placeholder="Enter title"
-                        onChange={(e)=> setTitle(e.target.value)}required value={title}/>
+                        <input type="text" className="form-control" id="name" placeholder="Enter Name"
+                        onChange={(e)=> setName(e.target.value)}required value={name}/>
                     </div>
                     <br/>
                     <div className="form-group col-md-12">
-                        <textarea className="form-control" id="content" rows="5" placeholder="Enter content"
-                        onChange={(e)=> setContent(e.target.value)} required value={content}></textarea>
+                        <input type="text" className="form-control" id="name" placeholder="Enter Email"
+                        onChange={(e)=> setEmail(e.target.value)}required value={email}/>
+                    </div>
+                    <br/>
+                    <div className="form-group col-md-12">
+                        <input type="password" className="form-control" id="title" placeholder="Enter Password"
+                        onChange={(e)=> setPassword(e.target.value)}required value={password}/>
                     </div>
                     <div className="form-group col-md-3">
                         <button type="submit" className="btn btn-primary mt-3" style={{width:"150px", float:"left"}}
@@ -104,25 +114,24 @@ export default function News() {
                     <thead className="table-dark">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Content</th>
-                            <th scope="col">CreatedOn</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         {data.map((item, index) => (
                             <tr key={index}>
                                 <th scope="row">{index + 1}</th>
-                                <td>{item.title}</td>
-                                <td>{item.content}</td>
-                                <td>{item.createdOn}</td>
+                                <td>{item.name}</td>
+                                <td>{item.email}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             ) : (
                 <div className="alert alert-info" role="alert" style={{marginTop: "20px"}}>
-                    No News data available.     
+                    No Staff data available.     
                 </div>  
             )
             }

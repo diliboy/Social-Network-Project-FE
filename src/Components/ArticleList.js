@@ -86,7 +86,7 @@ export default function ArticleList() {
                                 <td>{item.email}</td>
                                 <td>{item.image ? item.image :"-" }</td>
                                 <td>{item.isApproved ? "Yes" : "No"}</td>
-                                <td>{ item.isApproved ?
+                                <td>{item.isApproved ?
                                     "Already Approved" 
                                     :
                                     <button className="btn btn-primary" onClick={(e) => {handleApprove(e,item.id)}}>

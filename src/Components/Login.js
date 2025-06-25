@@ -52,6 +52,11 @@ function Login() {
         });
     }
 
+    const handleRegister = (e) => {
+        e.preventDefault();
+        navigate("/registration");
+    }
+
     return (
         <section className="vh-100">
             <div className="container py-5 h-100">
@@ -112,12 +117,16 @@ function Login() {
                             <button type="submit" className="btn btn-primary btn-lg btn-block" onClick={(e) => {handleLogin(e)}}>
                                 Sign in
                             </button>
+                            <br/>
+                            <button className="btn btn-secondary btn-lg btn-block" onClick={(e) => {handleRegister(e)}}>
+                                Register
+                            </button>
 
-                            <div className="divider d-flex align-items-center my-4">
+                            {/* <div className="divider d-flex align-items-center my-4">
                                 <p className="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
-                            </div>
+                            </div> */}
 
-                            <a
+                            {/* <a
                                 className="btn btn-primary btn-lg btn-block mb-2"
                                 style={{ backgroundColor: "#3b5998" }}
                                 href="#!"
@@ -132,7 +141,7 @@ function Login() {
                                 role="button"
                             >
                                 <i className="fab fa-twitter me-2"></i>Continue with Twitter
-                            </a>
+                            </a> */}
                         </form>
                     </div>
                 </div>

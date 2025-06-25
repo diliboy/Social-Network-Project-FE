@@ -6,16 +6,16 @@ export default function AdminHeader() {
     const [userName, setUserName] = useState("");
 
     useEffect(() => {
-        setUserName(localStorage.getItem("userName"));
+        setUserName(localStorage.getItem("username"));
     }, []);
 
     const handleLogout = (e) => {
         e.preventDefault();
-        localStorage.removeItem("userName");
+        localStorage.removeItem("username");
         navigate("/");
     }
 
-    console.log("userName", userName);
+    console.log("userName Admin Header", localStorage.getItem("username"));
 
     return (
         <Fragment>
@@ -58,7 +58,7 @@ export default function AdminHeader() {
                         </li>
                         
                         <li className="nav-item">
-                            <Link to="/staffList" className="nav-link">
+                            <Link to="/staff" className="nav-link">
                                 Staff Management
                             </Link>
                         </li>
