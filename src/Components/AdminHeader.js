@@ -47,14 +47,19 @@ export default function AdminHeader() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/articlelist" className="nav-link">
+                            <Link to="/articleList" className="nav-link">
                                 Article Management
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/newsList" className="nav-link">
+                                News Management
                             </Link>
                         </li>
                         
                         <li className="nav-item">
-                            <Link to="/userArticle" className="nav-link">
-                                Add Article
+                            <Link to="/staffList" className="nav-link">
+                                Staff Management
                             </Link>
                         </li>
                     </ul>

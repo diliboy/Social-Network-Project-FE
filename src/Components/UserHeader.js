@@ -48,8 +48,8 @@ export default function UserHeader() {
                         </li>
                     
                         <li className="nav-item">
-                            <Link to="/userArticle" className="nav-link">
-                                Add Article
+                            <Link to="/userNews" className="nav-link">
+                                News
                             </Link>
                         </li>
                     </ul>
