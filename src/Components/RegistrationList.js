@@ -63,6 +63,9 @@ export default function RegistrationList() {
     return (
         <Fragment>
             <AdminHeader/>
+            <div className="form-group col-md-12 mt-4">
+                <h3>Registration List</h3>
+            </div>
             {data ? (
                 <table className="table stripped table-hover mt-4"
                     style={{ backgroundColor:"white", width: "80%", margin: "0 auto" }}>

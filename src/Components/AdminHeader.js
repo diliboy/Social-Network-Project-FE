@@ -20,7 +20,9 @@ export default function AdminHeader() {
     return (
         <Fragment>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a className="navbar-brand" href="#">Social Network</a>
+                <Link to="/adminDashboard" className="navbar-brand">
+                    Social Network
+                </Link>
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -36,10 +38,10 @@ export default function AdminHeader() {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item active">
-                            <a className="nav-link" href="#">
+                            <Link to="/adminDashboard" className="nav-link">
                                 Welcome <span className="visually-hidden">(current)</span>
                                 {userName ? userName : "Guest"}
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <Link to="/registrationlist" className="nav-link">
@@ -56,7 +58,7 @@ export default function AdminHeader() {
                                 News Management
                             </Link>
                         </li>
-                        
+
                         <li className="nav-item">
                             <Link to="/staff" className="nav-link">
                                 Staff Management

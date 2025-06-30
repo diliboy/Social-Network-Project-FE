@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { use } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -26,15 +26,17 @@ function Login() {
             if (dt.statusCode === 200) {
                 if(email === "admin" || password === "admin") {
                     localStorage.setItem("username", email);
+                    localStorage.setItem("loggedEmail", email);
                     console.log("username", email);
-                    navigate("/adminDashborad"); 
+                    console.log("email", email);
+                    navigate("/adminDashboard"); 
                 }else {
                     localStorage.setItem("loggedEmail", email);
                     localStorage.setItem("username", dt.registration.name);
                     if(dt.registration.userType === "STAFF") {
                         navigate("/staffDashboard");
                     }else{
-                        navigate("/userDashborad");
+                        navigate("/userDashboard");
                     }
                 }
                 // localStorage.setItem("userName", dt.userName);

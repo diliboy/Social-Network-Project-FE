@@ -14,7 +14,7 @@ export default function News() {
 
     const handleSave = (e) => {
         e.preventDefault();
-        console.log(title, content);
+        console.log(title, content, localStorage.getItem("loggedEmail"));
         const data = {
             Title: title,
             Content: content,
@@ -38,11 +38,34 @@ export default function News() {
         e.preventDefault();
         setTitle("");
         setContent("");
-    }   
+    }  
+    
+    const handleApprove = async (e, id) => {
+        e.preventDefault();
+        try {
+            const url = `https://localhost:44321/api/News/NewsApproval`;
+            const data = {
+                Id: id
+            }
+            axios.post(url, data)
+                .then((response) => {
+                    const data = response.data;     
+                if (data.statusCode === 200) {
+                    alert(data.statusMessage);
+                    getData(); // Refresh the list after approval
+                }   
+                })
+                .catch((error) => {
+                    console.error("There was an error approving the article!", error);
+                });
+        } catch (error) {
+            console.error("Error approving article:", error);
+        }
+    }
 
     const getData = async () => { 
         try {
-            const url = `https://localhost:44321/api/News/NewsList`;
+            const url = `https://localhost:44321/api/News/AdminNewsList`;
    
             axios.get(url)
                 .then((response) => {
@@ -107,6 +130,8 @@ export default function News() {
                             <th scope="col">Title</th>
                             <th scope="col">Content</th>
                             <th scope="col">CreatedOn</th>
+                            <th scope="col">IsApproved</th>
+                            <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -116,6 +141,15 @@ export default function News() {
                                 <td>{item.title}</td>
                                 <td>{item.content}</td>
                                 <td>{item.createdOn}</td>
+                                <td>{item.isApproved ? "Yes" : "No"}</td>
+                                <td>{item.isApproved ?
+                                    "Already Approved" 
+                                    :
+                                    <button className="btn btn-primary" onClick={(e) => {handleApprove(e,item.id)}}>
+                                        Approve
+                                    </button>
+                                }
+                                </td>
                             </tr>
                         ))}
                     </tbody>
